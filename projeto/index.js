@@ -20,11 +20,15 @@ console.log('*******************************************************************
 
 
 //Receber via terminal as entradas de id e quantidade dos produtos a serem adquiridos.
-const id = parseInt(input.question("Digite a id do produto: "))
-const quantity = parseInt(input.question("Quantidade: "))
+const id = Number(input.question("Digite a id do produto: "))
+const quantity = Number(input.question("Quantidade: "))
 
-const hasDiscount = parseInt(input.question("Possui cupom de desconto? De quanto? "))
+//const hasDiscount = parseInt(input.question("Possui cupom de desconto? De quanto? "))
 
-const productChoose = products.filter(item => item.id === id)
+const productChoose = products.find(item => item.id === id)
 
 console.table(productChoose);
+
+const total = productChoose.preco*quantity
+
+console.log(total);
