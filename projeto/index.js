@@ -25,3 +25,6 @@ const quantity = parseInt(input.question("Quantidade: "))
 
 const hasDiscount = parseInt(input.question("Possui cupom de desconto? De quanto? "))
 
+const productChoose = products.filter(item => item.id === id)
+
+console.table(productChoose);
