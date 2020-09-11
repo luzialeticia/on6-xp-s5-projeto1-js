@@ -18,3 +18,7 @@ console.log('*******************************************************************
 
 
 //Receber via terminal as entradas de id e quantidade dos produtos a serem adquiridos.
+const id = parseInt(input.question("Digite a id do produto: "))
+const quantity = parseInt(input.question("Quantidade: "))
+
+const hasDiscount = parseInt(input.question("Possui cupom de desconto? De quanto? "))
