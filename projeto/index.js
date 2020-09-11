@@ -23,12 +23,18 @@ console.log('*******************************************************************
 const id = Number(input.question("Digite a id do produto: "))
 const quantity = Number(input.question("Quantidade: "))
 
-//const hasDiscount = parseInt(input.question("Possui cupom de desconto? De quanto? "))
+const hasDiscount = parseInt(input.question("Possui cupom de desconto? De quanto? "))
 
 const productChoose = products.find(item => item.id === id)
 
 console.table(productChoose);
 
-const total = productChoose.preco*quantity
+const total = (productChoose.preco*quantity).toFixed(2)
+
+const discount = (total*(hasDiscount/100.00)).toFixed(2)
 
 console.log(total);
+
+const totalWithDiscount = total - discount//(total*(10.00/100.00))
+
+console.log(totalWithDiscount);
