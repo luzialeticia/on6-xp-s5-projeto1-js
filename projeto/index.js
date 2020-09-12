@@ -49,40 +49,67 @@ class Order {
     }*/
 }
 
-//Pergunta id do produto
-let id = parseInt(input.question("Digite a ID do produto que deseja: "))
-let productChoose = products.find(item => item.id === id)
-    while(productChoose === undefined) {
-        id = parseInt(input.question("Produto não encontrado. Digite um ID correto: "))
-        productChoose = products.find(item => item.id === id)
-    }
-console.log(`${productChoose.nome} adicionado ao carrinho.`);
 
-//Pergunta quantidade
-let quantity = parseInt(input.question("Quantos itens deseja adicionar ao carrinho: "))
+
+///Função das compras
+const shopping = () => {
+
+    //Receber Id via terminal
+    idProduct = parseInt(input.question("Digite a ID do produto: "))
+    chosenProduct = products.find(item => item.id === idProduct)
+
+    //Validar o ID
+    while(chosenProduct === undefined) {
+        idProduct = parseInt(input.question('Produto não encontrado. Digite um ID correto: '))
+        chosenProduct = products.find(item => item.id === idProduct)
+    }
+    console.log(`${chosenProduct.nome} adicionado ao carrinho.`);
+
+    //Receber a quantidade de itens via terminal
+    quantity = parseInt(input.question("Quantos itens deseja adicionar ao carrinho: "))
+
+    //Validar a quantidade
     while(quantity <= 0) {
         quantity = parseInt(input.question("Quantidade inválida. Digite um valor maior que 0: "))
     }
-console.log(`${quantity} ${productChoose.nome} adicionados.`);
 
-const continueShopping = input.question("Deseja continuar comprando (S/N): ")
-    if(continueShopping === 'N' || continueShopping === 'n') {
-        addToCart()
-        console.log(``);
+
+     let totalThisItem = parseFloat((chosenProduct.preco*quantity).toFixed(2))
+
+    
+    //Adicionando itens no carrinho de compras
+    const listIten = { name: chosenProduct.nome, descrition: chosenProduct.descricao,  quantity: quantity, price: totalThisItem }
+    shoppingCart.push(listIten)
+
+
+    //Continuar compras
+    let wantContinue = input.question('Deseja continuar as compras? (S/N) ')
+
+    while(wantContinue === 'S' || wantContinue === 's') {
+        shopping()
+        wantContinue = input.question('Deseja continuar as compras? (S/N) ')
+    }
+
+    if(wantContinue === 'N' || wantContinue === 'n') {
+        console.table(shoppingCart)
+
+        const totalShopping = shoppingCart.reduce((accumulator, preco) => accumulator + (preco.price), 0)
+        console.log(`O valor total da sua compra é: R$ ${totalShopping} reais.`);
     }
 
 
-let hasDiscount
-let discount;
-let shoppingCart = new Array()
+    //Verifica se tem desconto
+    hasDiscount = input.question('Você tem cupom de desconto? (S/N) ')
 
+        //Caso sim, valida desconto
+        if(hasDiscount === 'S' || hasDiscount === 's') {
+            valueDiscount = parseFloat(input.question("Valor do desconto: "))
 
-//Função que adicionando itens ao carrinho
-const addToCart = () => {
-    const item = new Object()
-    item.name = productChoose.nome
-    item.price = productChoose.preco
-    item.quantity = quantity
-
-    return shoppingCart.push(item)
+                while(valueDiscount > 15 || valueDiscount <= 0) {
+                    valueDiscount = parseFloat(input.question("Cupom inválido. Tente outro: "))
+                }    
+        }
+    return
 }
+
+shopping()
