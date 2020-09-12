@@ -29,10 +29,10 @@ const shoppingCart = new Array()
 
 //Classe
 class Order {
-    constructor(listProducts, CouponValue) {
+    constructor(listProducts, CouponValue = 0) {
         this.produtos = listProducts //array shopping cart
         this.desconto = CouponValue
-        //this.data = new date()
+        this.data = new Date()
         this.total = 0
     }
     
@@ -109,7 +109,8 @@ const shopping = () => {
                     valueDiscount = parseFloat(input.question("Cupom inválido. Tente outro: "))
                 }    
         }
-    return `Obrigada por comprar conosco. Volste sempre!`
+        console.table(shoppingCart)
+    return `Obrigada por comprar conosco. Volte sempre!`
 }
 
 shopping()
@@ -117,6 +118,6 @@ shopping()
 
 
 //Iniciando a classe
-const order1 = new Order(shoppingCart, valueDiscount)
+const order1 = new Order(shoppingCart)
 
 console.log(order1)
