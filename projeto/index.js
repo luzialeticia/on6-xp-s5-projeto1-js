@@ -4,6 +4,7 @@ console.log('--------------------------------------')
 
 const db = require('./database')
 const input = require('readline-sync')
+const { produtos } = require('./database')
 
 //Listar no console uma tabela contendo os produtos em ordem crescente de preço (do menor ao maior).
 console.log('--------------- Listando os produtos em ordem crescente de preço: ---------------');
@@ -25,31 +26,6 @@ let quantity;
 let hasDiscount;
 let valueDiscount;
 const shoppingCart = new Array()
-
-
-//Classe
-class Order {
-    constructor(listProducts) {
-        this.produtos = listProducts //array shopping cart
-        this.desconto = 0
-        this.data = new Date()
-        this.totalItens = 0
-        this.total = 0
-    }
-    
-    SumTotalItens() {
-        this.totalItens = this.produtos.reduce((accumulator, currentIten) => accumulator + currentIten.quantity)
-    }
-    
-    // totalWithoutDiscount() {
-    
-    // }
-    
-    // totalWithDiscount() {
-    
-    // }
-}
-
 
 
 ///Função das compras
@@ -85,6 +61,8 @@ const shopping = () => {
     return
 }
 
+
+//Continuar comprando
 const continueShopping = () => {
     let wantContinue = input.question('Deseja continuar as compras? (S/N) ')
 
@@ -118,11 +96,38 @@ continueShopping()
 
 
 
+//Classe
+class Order {
+    constructor(listProducts) {
+        this.produtos = listProducts //array shopping cart
+        this.desconto = 0
+        this.data = new Date()
+        this.totalItens = 0
+        this.total = 0
+        this.totalWDiscount = 0
+    }
+    
+    SumTotalItens() {
+        this.totalItens = this.produtos.reduce((accumulator, currentIten) => accumulator + currentIten.quantity)
+    }
+    
+    totalWithoutDiscount() {
+        this.total = this.produtos.reduce((accumulator, currentIten) => accumulator + currentIten.price)
+    }
+    
+    // totalWithDiscount() {
+    //     this.totalWDiscount = 
+    // }
+}
+
+
+
+
 //Iniciando a classe
 const order1 = new Order(shoppingCart)
-console.table(order1.produtos)
+console.table(order1)
 
-// console.table(order1)
-
-// order1.SumTotalItens()
-// console.table(order1);
+order1.SumTotalItens()
+order1.totalWithoutDiscount()
+console.table(order1)
+console.table(order1.produtos);
