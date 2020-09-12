@@ -92,8 +92,6 @@ const shopping = () => {
     }
 
     if(wantContinue === 'N' || wantContinue === 'n') {
-        console.table(shoppingCart)
-
         const totalShopping = shoppingCart.reduce((accumulator, preco) => accumulator + (preco.price), 0)
         console.log(`O valor total da sua compra é: R$ ${totalShopping} reais.`);
     }
@@ -108,14 +106,10 @@ const shopping = () => {
                 while(valueDiscount > 15 || valueDiscount <= 0) {
                     valueDiscount = parseFloat(input.question("Cupom inválido. Tente outro: "))
                 }
-                
                 break;
-        
             default:
                 break;
         }
-
-        //console.table(shoppingCart)
     return `Obrigada por comprar conosco. Volte sempre!`
 }
 
