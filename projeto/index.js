@@ -109,13 +109,14 @@ const shopping = () => {
                     valueDiscount = parseFloat(input.question("Cupom inválido. Tente outro: "))
                 }    
         }
-    return
+    return `Obrigada por comprar conosco. Volste sempre!`
 }
 
 shopping()
 
 
+
 //Iniciando a classe
 const order1 = new Order(shoppingCart, valueDiscount)
 
-console.table(order1)
+console.log(order1)
