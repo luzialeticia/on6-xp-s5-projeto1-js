@@ -6,7 +6,6 @@ const db = require('./database')
 const input = require('readline-sync')
 
 //Listar no console uma tabela contendo os produtos em ordem crescente de preço (do menor ao maior).
-
 console.log('--------------- Listando os produtos em ordem crescente de preço: ---------------');
 
 const { produtos:products } = db
@@ -18,6 +17,37 @@ console.table(products)
 console.log('***********************************************************************************************************************');
 
 
+
+//Variáveis que serão utilizadas
+let idProduct;
+let chosenProduct;
+let quantity;
+let hasDiscount;
+let valueDiscount;
+const shoppingCart = new Array()
+
+
+//Classe
+class Order {
+    constructor(listProducts, CouponValue) {
+        this.produtos = listProducts //array shopping cart
+        this.desconto = CouponValue
+        //this.data = new date()
+        this.total = 0
+    }
+    
+    /*totalItens() {
+    
+    }
+    
+    totalWithoutDiscount() {
+    
+    }
+    
+    totalWithDiscount() {
+    
+    }*/
+}
 
 //Pergunta id do produto
 let id = parseInt(input.question("Digite a ID do produto que deseja: "))
@@ -35,8 +65,14 @@ let quantity = parseInt(input.question("Quantos itens deseja adicionar ao carrin
     }
 console.log(`${quantity} ${productChoose.nome} adicionados.`);
 
+const continueShopping = input.question("Deseja continuar comprando (S/N): ")
+    if(continueShopping === 'N' || continueShopping === 'n') {
+        addToCart()
+        console.log(``);
+    }
 
-let hasDiscount;
+
+let hasDiscount
 let discount;
 let shoppingCart = new Array()
 
