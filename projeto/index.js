@@ -82,8 +82,10 @@ const shopping = () => {
     const listIten = { name: chosenProduct.nome, quantity: quantity, price: totalThisItem }
     shoppingCart.push(listIten)
 
+    return
+}
 
-    //Continuar compras
+const continueShopping = () => {
     let wantContinue = input.question('Deseja continuar as compras? (S/N) ')
 
     while(wantContinue === 'S' || wantContinue === 's') {
@@ -101,19 +103,18 @@ const shopping = () => {
     hasDiscount = input.question('Você tem cupom de desconto? (S/N) ')
 
         //Caso sim, valida desconto
-        switch (valueDiscount = parseFloat(input.question("Valor do desconto: "))) {
-            case hasDiscount === 'S' || hasDiscount === 's':
+        if(hasDiscount === 'S' || hasDiscount === 's') {
+            valueDiscount = parseFloat(input.question("Valor do desconto: "))
+
                 while(valueDiscount > 15 || valueDiscount <= 0) {
                     valueDiscount = parseFloat(input.question("Cupom inválido. Tente outro: "))
-                }
-                break;
-            default:
-                break;
+                }    
         }
-    return `Obrigada por comprar conosco. Volte sempre!`
+    return
 }
 
 shopping()
+continueShopping()
 
 
 
