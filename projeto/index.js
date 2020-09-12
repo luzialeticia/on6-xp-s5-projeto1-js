@@ -29,24 +29,25 @@ const shoppingCart = new Array()
 
 //Classe
 class Order {
-    constructor(listProducts, CouponValue = 0) {
+    constructor(listProducts) {
         this.produtos = listProducts //array shopping cart
-        this.desconto = CouponValue
+        this.desconto = 0
         this.data = new Date()
+        this.totalItens = 0
         this.total = 0
     }
     
-    /*totalItens() {
-    
+    SumTotalItens() {
+        this.totalItens = this.produtos.reduce((accumulator, currentIten) => accumulator + currentIten.quantity)
     }
     
-    totalWithoutDiscount() {
+    // totalWithoutDiscount() {
     
-    }
+    // }
     
-    totalWithDiscount() {
+    // totalWithDiscount() {
     
-    }*/
+    // }
 }
 
 
@@ -78,7 +79,7 @@ const shopping = () => {
 
     
     //Adicionando itens no carrinho de compras
-    const listIten = { name: chosenProduct.nome, descrition: chosenProduct.descricao,  quantity: quantity, price: totalThisItem }
+    const listIten = { name: chosenProduct.nome, quantity: quantity, price: totalThisItem }
     shoppingCart.push(listIten)
 
 
@@ -102,14 +103,19 @@ const shopping = () => {
     hasDiscount = input.question('Você tem cupom de desconto? (S/N) ')
 
         //Caso sim, valida desconto
-        if(hasDiscount === 'S' || hasDiscount === 's') {
-            valueDiscount = parseFloat(input.question("Valor do desconto: "))
-
+        switch (valueDiscount = parseFloat(input.question("Valor do desconto: "))) {
+            case hasDiscount === 'S' || hasDiscount === 's':
                 while(valueDiscount > 15 || valueDiscount <= 0) {
                     valueDiscount = parseFloat(input.question("Cupom inválido. Tente outro: "))
-                }    
+                }
+                
+                break;
+        
+            default:
+                break;
         }
-        console.table(shoppingCart)
+
+        //console.table(shoppingCart)
     return `Obrigada por comprar conosco. Volte sempre!`
 }
 
@@ -119,5 +125,9 @@ shopping()
 
 //Iniciando a classe
 const order1 = new Order(shoppingCart)
+console.table(order1.produtos)
 
-console.log(order1)
+// console.table(order1)
+
+// order1.SumTotalItens()
+// console.table(order1);
