@@ -113,3 +113,9 @@ const shopping = () => {
 }
 
 shopping()
+
+
+//Iniciando a classe
+const order1 = new Order(shoppingCart, valueDiscount)
+
+console.table(order1)
